@@ -9,8 +9,8 @@ export function AboutSection() {
   const handleDownloadCV = () => {
     // Create a link element to trigger download
     const link = document.createElement('a')
-    link.href = '/Muhammad_Musa_Khan_CV.pdf' // You'll need to add your CV file to the public folder
-    link.download = 'Muhammad_Musa_Khan_CV.pdf'
+    link.href = '/SA_Noyon_resume.docx'; // You'll need to add your CV file to the public folder
+    link.download = 'SA_Noyon_resume.docx';
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
