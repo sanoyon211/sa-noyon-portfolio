@@ -65,33 +65,46 @@ const SkillsCard = ({
 export function SkillsSection() {
   const skills = [
     {
-      title: "Frontend Development",
-      description: "React, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, JavaScript ES6+",
+      title: 'Frontend Development',
+      description:
+        'React, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, JavaScript ES6+',
       icon: <IconBrandReact className="w-6 h-6" />,
     },
-  
+
     {
-      title: "Version Control",
-      description: "Git, GitHub, Project Collaboration",
+      title: 'Backend Development',
+      description: 'Node.js, Express.js, MongoDB, PostgreSQL, RESTful APIs',
+      icon: <IconBrandNodejs className="w-6 h-6" />,
+    },
+
+    {
+      title: 'Database Management',
+      description: 'MongoDB',
+      icon: <IconDatabase className="w-6 h-6" />,
+    },
+
+    {
+      title: 'Version Control',
+      description: 'Git, GitHub, Project Collaboration',
       icon: <IconCloud className="w-6 h-6" />,
     },
 
     {
-      title: "Mobile Development",
-      description: "React Native, Progressive Web Apps, Responsive Design",
+      title: 'Mobile Development',
+      description: 'React Native, Progressive Web Apps, Responsive Design',
       icon: <IconDeviceMobile className="w-6 h-6" />,
     },
     {
-      title: "Programming Languages",
-      description: "JavaScript",
+      title: 'Programming Languages',
+      description: 'JavaScript',
       icon: <IconBrandPython className="w-6 h-6" />,
     },
     {
-      title: "Graphics Design",
-      description: "Adobe Photoshop, Adobe Illustrator ",
+      title: 'Graphics Design',
+      description: 'Adobe Photoshop, Adobe Illustrator ',
       icon: <IconBrandAdobe className="w-6 h-6" />,
     },
-  ]
+  ];
 
   return (
     <section id="skills" className="relative py-20 px-8 md:px-16 lg:px-24 bg-black text-white overflow-hidden">

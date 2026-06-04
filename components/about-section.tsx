@@ -1,20 +1,20 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { IconDownload } from "@tabler/icons-react"
-import { PurpleFlowingLights } from "@/components/ui/purple-flowing-lights"
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { IconDownload } from '@tabler/icons-react';
+import { PurpleFlowingLights } from '@/components/ui/purple-flowing-lights';
 
 export function AboutSection() {
   const handleDownloadCV = () => {
     // Create a link element to trigger download
-    const link = document.createElement('a')
-    link.href = '/SA_Noyon_resume.docx'; // You'll need to add your CV file to the public folder
-    link.download = 'SA_Noyon_resume.docx';
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+    const link = document.createElement('a');
+    link.href = '/Md. Sohab Akter Noyon Resume - Mern Stack Developer.pdf'; // You'll need to add your CV file to the public folder
+    link.download = 'Md. Sohab Akter Noyon Resume - Mern Stack Developer.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section
@@ -71,13 +71,13 @@ export function AboutSection() {
               Bangladesh who enjoys building modern and responsive web
               applications. I love turning ideas into real working websites and
               continuously learning new tools to make my projects better. I'm
-              focused on becoming a skilled Front-End Web Developer with
+              focused on becoming a skilled Full-Stack Web Developer with
               expertise in the MERN Stack.
             </p>
             <p className="text-lg text-neutral-300 leading-relaxed">
-              I work with front-end technologies including React.js, JavaScript,
-              HTML5, CSS3, and Tailwind CSS to create web apps that are easy to
-              use, look great, and perform well across all devices.
+              I work with both front-end and back-end technologies, including
+              React.js, Next.js, Node.js, Express.js, MongoDB, and JavaScript, to create
+              robust and scalable web applications.
             </p>
             <p className="text-lg text-neutral-300 leading-relaxed">
               When I'm not coding, I enjoy exploring new technologies and

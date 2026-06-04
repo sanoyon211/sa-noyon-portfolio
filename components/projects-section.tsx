@@ -8,6 +8,22 @@ import { ExternalLink, Github } from "lucide-react"
 export function ProjectsSection() {
   const projects = [
     {
+      title: 'MediQueue ',
+      description:
+        'MediQueue is a modern, premium, and fully responsive Tutor Booking Web Application built with the MERN stack. It allows students to explore, filter, and book experienced tutors, while also enabling tutors to register and manage their tuition slots dynamically.',
+      image: '/images/mediqueue.png',
+      technologies: [
+        'Next.js',
+        'Tailwind CSS',
+        'Node.js',
+        'Express.js',
+        'JWT',
+        'MongoDB Atlas',
+      ],
+      liveUrl: 'https://mediqueue-sa.vercel.app',
+      githubUrl: 'https://github.com/sanoyon211/assignment09-mediqueue-client',
+    },
+    {
       title: 'Swift Express Cargo ',
       description:
         'A cargo shipping web app for USA to Bangladesh shipments. Features include real-time shipment tracking, cost calculator, user sign-up/login, and a blog section — all with a clean and responsive UI.',
@@ -25,23 +41,15 @@ export function ProjectsSection() {
       liveUrl: 'https://warmhut-fashion.netlify.app',
       githubUrl: 'https://github.com/sanoyon211/warmhut.git',
     },
+
     {
-      title: 'The Nexus Social ',
+      title: 'Tile Gallery',
       description:
-        'A social media platform UI with a clean and modern interface, designed for connecting people and sharing content in a responsive layout.',
-      image: '/images/nexus-social.png',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'React'],
-      liveUrl: 'https://the-nexus-social.netlify.app',
-      githubUrl: 'https://github.com/sanoyon211/nexus-social.git',
-    },
-    {
-      title: 'EduMentor ',
-      description:
-        'An online learning platform frontend with a bold and modern design. Built for students to explore courses and grow their skills with an intuitive and responsive layout.',
-      image: '/images/edumentor.png',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'React'],
-      liveUrl: 'https://the-edumentor.netlify.app',
-      githubUrl: 'https://github.com/sanoyon211/edumentor.git',
+        'A premium web application to showcase and explore a curated collection of artistic tiles. Users can browse tiles, view details, and manage their personal profiles.',
+      image: '/images/tile-gallery.png',
+      technologies: ['Tailwind CSS', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Butter Auth'],
+      liveUrl: 'https://tiles-gallery-ph.vercel.app',
+      githubUrl: 'https://github.com/sanoyon211/ph-assignment-08-tiles-gallery.git',
     },
     {
       title: 'Inkwell Blog ',
