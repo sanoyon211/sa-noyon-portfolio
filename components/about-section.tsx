@@ -9,8 +9,8 @@ export function AboutSection() {
   const handleDownloadCV = () => {
     // Create a link element to trigger download
     const link = document.createElement('a');
-    link.href = '/Md. Sohab Akter Noyon Resume - Mern Stack Developer.pdf'; // You'll need to add your CV file to the public folder
-    link.download = 'Md. Sohab Akter Noyon Resume - Mern Stack Developer.pdf';
+    link.href = '/Md. Sohab Akter Noyon Resume - Mern Stack Developer .pdf'; // You'll need to add your CV file to the public folder
+    link.download = 'Md. Sohab Akter Noyon Resume - Mern Stack Developer .pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
