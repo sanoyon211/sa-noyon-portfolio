@@ -61,7 +61,7 @@ export function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
+    <section id="experience" className="relative py-20 px-4 sm:px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
       {/* Squares Background */}
       <div className="absolute inset-0">
         <Squares 
@@ -90,17 +90,17 @@ export function ExperienceSection() {
           <div className="flex justify-center items-center gap-4 mb-8">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm"
+              className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <div className="flex items-center gap-3">
-              {slides[currentSlide].icon}
-              <h3 className="text-2xl font-semibold">{slides[currentSlide].title}</h3>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="shrink-0">{slides[currentSlide].icon}</div>
+              <h3 className="text-xl sm:text-2xl font-semibold text-center">{slides[currentSlide].title}</h3>
             </div>
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm"
+              className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
             >
               <ChevronRight className="w-6 h-6" />
             </button>

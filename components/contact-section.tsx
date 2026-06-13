@@ -97,7 +97,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden min-h-screen">
+    <section id="contact" className="relative py-20 px-4 sm:px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden min-h-screen">
       {/* Background Paths Animation */}
       <div className="absolute inset-0">
         <BackgroundPathsOnly />
@@ -118,7 +118,7 @@ export function ContactSection() {
           Get In Touch
         </motion.h2>
         <motion.p
-          className="text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium"
+          className="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium px-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -240,7 +240,7 @@ export function ContactSection() {
 
             <div>
               <h3 className="text-2xl font-semibold mb-6 text-foreground">Follow Me</h3>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.name}

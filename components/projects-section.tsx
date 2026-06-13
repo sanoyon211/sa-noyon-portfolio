@@ -38,7 +38,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
+    <section id="projects" className="relative py-20 px-4 sm:px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
       {/* Squares Background */}
       <div className="absolute inset-0">
         <Squares 
@@ -62,7 +62,7 @@ export function ProjectsSection() {
           My Projects
         </motion.h2>
         <motion.p
-          className="text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium"
+          className="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium px-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -89,7 +89,7 @@ export function ProjectsSection() {
                   height={300}
                   className="w-full h-48 object-contain bg-gray-900"
                 />
-                <div className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                <div className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
                   <Button
                     size="sm"
                     className="bg-white text-black hover:bg-white/90"
@@ -129,7 +129,7 @@ export function ProjectsSection() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-12 flex justify-end items-center gap-4">
+          <div className="mt-12 flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-4">
             <span className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
               Page {currentPage} of {totalPages}
             </span>

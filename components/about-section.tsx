@@ -20,7 +20,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden"
+      className="relative py-20 px-4 sm:px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden"
     >
       {/* Purple Flowing Lights Background */}
       <div className="absolute inset-0">
@@ -47,7 +47,7 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-[450px] h-[450px] border-2 border-white/20 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm shadow-2xl">
+            <div className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] aspect-square border-2 border-white/20 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm shadow-2xl">
               <Image
                 src="/images/sa-noyon.jpg"
                 alt="Md. Sohab Akter Noyon"
@@ -69,7 +69,7 @@ export function AboutSection() {
             <h3 className="text-2xl font-semibold text-foreground">
               Hello! I'm Md Sohab Akter Noyon
             </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               I'm a 22-year-old Computer Science student from Dinajpur,
               Bangladesh who enjoys building modern and responsive web
               applications. I love turning ideas into real working websites and
@@ -115,7 +115,7 @@ export function AboutSection() {
             >
               <Button
                 onClick={handleDownloadCV}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg"
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 <IconDownload className="w-5 h-5 mr-2" />
                 Download Resume

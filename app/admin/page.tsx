@@ -219,15 +219,15 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="flex justify-between items-center">
+    <div className="min-h-screen bg-neutral-950 text-white p-4 sm:p-8">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
           <h1 className="text-3xl font-bold">Project Management</h1>
           <Button onClick={handleLogout} className="bg-red-500/10 text-red-500 hover:bg-red-500/20 hover:text-red-400 border border-red-500/20">Logout</Button>
         </div>
 
         {/* Add/Edit Form */}
-        <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
+        <div className="bg-neutral-900 p-4 sm:p-6 rounded-xl border border-neutral-800">
           <h2 className="text-xl font-semibold mb-4">{editingId ? 'Edit Project' : 'Add New Project'}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -291,17 +291,17 @@ export default function AdminPage() {
           {isLoading ? <p>Loading projects...</p> : (
             <div className="grid gap-4">
               {projects.map(project => (
-                <div key={project._id} className="bg-neutral-900 p-4 rounded-xl border border-neutral-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <div>
-                    <div className="flex items-center gap-3">
+                <div key={project._id} className="bg-neutral-900 p-4 rounded-xl border border-neutral-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 w-full overflow-hidden">
+                  <div className="w-full">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                        <h3 className="font-bold text-lg">{project.title}</h3>
                        <span className="bg-purple-600/20 text-purple-400 px-2 py-0.5 rounded text-xs">Order: {project.order || 100}</span>
                     </div>
-                    <p className="text-sm text-neutral-400 truncate max-w-lg">{project.description}</p>
+                    <p className="text-sm text-neutral-400 mt-1 sm:mt-0 line-clamp-2">{project.description}</p>
                   </div>
-                  <div className="flex gap-2 shrink-0">
-                    <Button onClick={() => handleEdit(project)} variant="secondary" size="sm">Edit</Button>
-                    <Button onClick={() => handleDelete(project._id)} size="sm" className="bg-red-500/10 text-red-500 hover:bg-red-500/20 hover:text-red-400 border border-red-500/20">Delete</Button>
+                  <div className="flex gap-2 shrink-0 w-full sm:w-auto">
+                    <Button onClick={() => handleEdit(project)} variant="secondary" size="sm" className="flex-1 sm:flex-none">Edit</Button>
+                    <Button onClick={() => handleDelete(project._id)} size="sm" className="flex-1 sm:flex-none bg-red-500/10 text-red-500 hover:bg-red-500/20 hover:text-red-400 border border-red-500/20">Delete</Button>
                   </div>
                 </div>
               ))}

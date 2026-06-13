@@ -22,7 +22,7 @@ export function TechnologiesSection() {
   return (
     <section
       id="technologies"
-      className="relative py-24 px-8 md:px-16 lg:px-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-900 text-foreground overflow-hidden"
+      className="relative py-20 sm:py-24 px-4 sm:px-8 md:px-16 lg:px-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-900 text-foreground overflow-hidden"
     >
       {/* Glowing gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.1),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_60%)]" />
@@ -30,7 +30,7 @@ export function TechnologiesSection() {
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Title animation */}
         <motion.h2
-          className="text-5xl font-extrabold mb-16 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 dark:from-blue-400 dark:via-cyan-400 dark:to-purple-500 bg-clip-text text-transparent"
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 sm:mb-16 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 dark:from-blue-400 dark:via-cyan-400 dark:to-purple-500 bg-clip-text text-transparent px-2"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

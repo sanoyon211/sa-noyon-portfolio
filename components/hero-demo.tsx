@@ -146,7 +146,7 @@ const HeroDemo = () => {
               <br />
               <motion.span
                 variants={wordVariants}
-                className="inline-block mr-2 text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm pb-2"
+                className="inline-block mr-2 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm pb-2"
               >
                 {nameText}
               </motion.span>
@@ -170,23 +170,23 @@ const HeroDemo = () => {
               ))}
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 items-center"
+              className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto px-4 sm:px-0"
               variants={buttonContainerVariants}
               initial="hidden"
               animate={isAnimationComplete ? "visible" : "hidden"}
             >
-              <motion.div variants={buttonVariants}>
+              <motion.div variants={buttonVariants} className="w-full sm:w-auto">
                 <Button
                   onClick={handleViewProjects}
-                  className="text-sm px-8 py-3 rounded-xl bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 text-white border border-purple-400/50 shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 font-semibold"
+                  className="w-full sm:w-auto text-sm px-8 py-3 rounded-xl bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 text-white border border-purple-400/50 shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 font-semibold"
                 >
                   View Projects
                 </Button>
               </motion.div>
-              <motion.div variants={buttonVariants}>
+              <motion.div variants={buttonVariants} className="w-full sm:w-auto">
                 <Button
                   onClick={handleContactMe}
-                  className="text-sm px-8 py-3 rounded-xl bg-white/50 dark:bg-black/50 backdrop-blur-md text-black dark:text-white border border-black/10 dark:border-white/10 shadow-sm hover:bg-white/80 dark:hover:bg-white/10 transition-all duration-300 font-medium hover:scale-105"
+                  className="w-full sm:w-auto text-sm px-8 py-3 rounded-xl bg-white/50 dark:bg-black/50 backdrop-blur-md text-black dark:text-white border border-black/10 dark:border-white/10 shadow-sm hover:bg-white/80 dark:hover:bg-white/10 transition-all duration-300 font-medium hover:scale-105"
                 >
                   Contact Me
                 </Button>
@@ -197,7 +197,7 @@ const HeroDemo = () => {
 
         {/* Cards Section - Now follows proper sequence */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-5xl mx-auto px-2"
           variants={cardsContainerVariants}
           initial="hidden"
           animate={isAnimationComplete ? "visible" : "hidden"}

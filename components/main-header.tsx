@@ -64,12 +64,12 @@ export function MainHeader() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
+      className={`fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 w-max max-w-[95vw] ${
         isScrolled ? "scale-95" : "scale-100"
       }`}
     >
-      <div className="flex items-center gap-1 bg-white/50 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/20 rounded-full px-4 py-2 shadow-2xl shadow-black/5 dark:shadow-black/20">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 bg-white/50 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/20 rounded-full px-3 sm:px-4 py-2 shadow-2xl shadow-black/5 dark:shadow-black/20 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex items-center gap-1 shrink-0">
           <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse"></div>
           <span className="text-foreground/90 font-semibold text-sm mr-2">SA</span>
         </div>
@@ -117,7 +117,7 @@ export function MainHeader() {
         </div>
 
         {/* Theme Toggle Button */}
-        <div className="ml-1 flex items-center border-l border-black/20 dark:border-white/20 pl-2">
+        <div className="ml-1 flex items-center border-l border-black/20 dark:border-white/20 pl-2 shrink-0">
           <ThemeToggle />
         </div>
       </div>

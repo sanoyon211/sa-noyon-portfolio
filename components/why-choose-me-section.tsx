@@ -110,7 +110,7 @@ export function WhyChooseMeSection() {
   ]
 
   return (
-    <section className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
+    <section className="relative py-20 px-4 sm:px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
       {/* Background Paths Animation */}
       <div className="absolute inset-0">
         <BackgroundPathsOnly />
@@ -131,7 +131,7 @@ export function WhyChooseMeSection() {
           Why Choose Me?
         </motion.h2>
         <motion.p
-          className="text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium"
+          className="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium px-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -141,7 +141,7 @@ export function WhyChooseMeSection() {
         </motion.p>
         
         {/* Reasons Grid with consistent spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative z-10">
           {reasons.map((reason, index) => (
             <motion.div
               key={reason.title}
