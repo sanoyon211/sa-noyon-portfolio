@@ -10,8 +10,8 @@ export function AboutSection() {
   const handleDownloadCV = () => {
     // Create a link element to trigger download
     const link = document.createElement('a');
-    link.href = '/Md. Sohab Akter Noyon Resume - Mern Stack Developer .pdf'; // You'll need to add your CV file to the public folder
-    link.download = 'Md. Sohab Akter Noyon Resume - Mern Stack Developer .pdf';
+    link.href = '/Md_Sohab_Akter_Noyon_FrontEnd_Developer.pdf'; // You'll need to add your CV file to the public folder
+    link.download = 'Md_Sohab_Akter_Noyon_FrontEnd_Developer.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -118,7 +118,7 @@ export function AboutSection() {
                 className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 <IconDownload className="w-5 h-5 mr-2" />
-                Download My CV
+                Download Resume
               </Button>
             </motion.div>
           </motion.div>
