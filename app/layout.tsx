@@ -34,9 +34,6 @@ export const metadata: Metadata = {
     creator: '@sanoyon',
     images: ['/og-image.png'],
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
 };
 
 

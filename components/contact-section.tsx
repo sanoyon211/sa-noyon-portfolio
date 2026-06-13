@@ -54,7 +54,7 @@ export function ContactSection() {
     {
       icon: <IconBrandLinkedin className="w-6 h-6" />,
       name: 'LinkedIn',
-      url: 'www.linkedin.com/in/sa-noyon/',
+      url: 'https://www.linkedin.com/in/sa-noyon/',
       color: 'hover:text-blue-400',
     },
     {
@@ -72,9 +72,10 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     try {
-      const response = await fetch("https://formspree.io/f/your_formspree_id_here", {
+      const response = await fetch("https://formspree.io/f/xwvjwwkg", {
         method: "POST",
         body: formData,
         headers: {
@@ -84,7 +85,7 @@ export function ContactSection() {
       
       if (response.ok) {
         toast.success("Message sent successfully!")
-        e.currentTarget.reset()
+        form.reset()
       } else {
         toast.error("Failed to send message. Please try again.")
       }

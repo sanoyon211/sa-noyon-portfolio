@@ -5,9 +5,37 @@ import { Button } from "@/components/ui/button"
 import { Squares } from "@/components/ui/squares-background"
 import { ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
-import { projects } from "@/data/projects"
+import { projects as staticProjects } from "@/data/projects"
+import { useState, useEffect } from "react"
 
 export function ProjectsSection() {
+  const [projectsList, setProjectsList] = useState(staticProjects);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(json => {
+        if (json.success && json.data && json.data.length > 0) {
+          setProjectsList(json.data);
+        }
+      })
+      .catch(err => console.error("Failed to fetch projects from DB", err));
+  }, []);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProjects = projectsList.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(projectsList.length / itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
 
   return (
     <section id="projects" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
@@ -44,7 +72,7 @@ export function ProjectsSection() {
           problem-solving.
         </motion.p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 50 }}
@@ -98,6 +126,35 @@ export function ProjectsSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-end items-center gap-4">
+            <span className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
+              Page {currentPage} of {totalPages}
+            </span>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className="border-neutral-300 dark:border-neutral-700"
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className="border-neutral-300 dark:border-neutral-700"
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
