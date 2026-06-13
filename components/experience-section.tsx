@@ -61,7 +61,7 @@ export function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="relative py-20 px-8 md:px-16 lg:px-24 bg-black text-white overflow-hidden">
+    <section id="experience" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
       {/* Squares Background */}
       <div className="absolute inset-0">
         <Squares 
@@ -76,7 +76,7 @@ export function ExperienceSection() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.h2
-          className="text-4xl font-bold text-center mb-16 text-white"
+          className="text-4xl font-bold text-center mb-16 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -90,7 +90,7 @@ export function ExperienceSection() {
           <div className="flex justify-center items-center gap-4 mb-8">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm"
+              className="p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -100,7 +100,7 @@ export function ExperienceSection() {
             </div>
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm"
+              className="p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -113,7 +113,7 @@ export function ExperienceSection() {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentSlide ? "bg-white" : "bg-white/30"
+                  index === currentSlide ? "bg-black dark:bg-white" : "bg-black/20 dark:bg-white/30"
                 }`}
               />
             ))}
@@ -135,14 +135,14 @@ export function ExperienceSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                  className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-lg p-6 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                    <h4 className="text-xl font-semibold text-white">{item.title}</h4>
-                    <span className="text-sm text-neutral-400 mt-1 md:mt-0">{item.period}</span>
+                    <h4 className="text-xl font-semibold text-foreground">{item.title}</h4>
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-1 md:mt-0">{item.period}</span>
                   </div>
-                  <p className="text-blue-400 font-medium mb-2">{item.company}</p>
-                  <p className="text-neutral-300 leading-relaxed">{item.description}</p>
+                  <p className="text-blue-600 dark:text-blue-400 font-medium mb-2">{item.company}</p>
+                  <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium dark:font-normal">{item.description}</p>
                 </motion.div>
               ))}
             </motion.div>

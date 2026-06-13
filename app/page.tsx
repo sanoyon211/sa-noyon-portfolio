@@ -13,7 +13,7 @@ import { ContactSection } from "@/components/contact-section"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#000] text-white">
+    <div className="min-h-screen bg-white dark:bg-[#000] text-black dark:text-white transition-colors duration-300">
       <MainHeader />
       <main>
         <HeroDemo />
@@ -26,7 +26,7 @@ export default function HomePage() {
         <ContactSection />
       </main>
       {/* Footer */}
-      <footer className="py-8 px-8 md:px-16 lg:px-24 bg-[#000] text-center text-neutral-500 text-sm">
+      <footer className="py-8 px-8 md:px-16 lg:px-24 bg-white dark:bg-[#000] text-center text-neutral-500 text-sm">
         <p>&copy; {new Date().getFullYear()} SA Noyon. All rights reserved.</p>
       </footer>
     </div>

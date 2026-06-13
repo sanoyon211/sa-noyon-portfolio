@@ -27,7 +27,7 @@ const SkillsCard = ({
 }) => {
   return (
     <motion.div
-      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
+      className="group relative bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-xl p-6 h-full hover:bg-white/80 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 shadow-sm dark:shadow-none"
       whileHover={{ 
         y: -8,
         transition: { duration: 0.3, ease: "easeOut" }
@@ -44,12 +44,12 @@ const SkillsCard = ({
       </div>
       
       {/* Title with enhanced hover effect */}
-      <h3 className="text-lg font-bold mb-3 text-white group-hover:text-blue-300 transition-colors duration-300">
+      <h3 className="text-lg font-bold mb-3 text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
         {title}
       </h3>
       
       {/* Description */}
-      <p className="text-sm text-neutral-300 group-hover:text-neutral-200 transition-colors duration-300 leading-relaxed">
+      <p className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors duration-300 leading-relaxed font-medium dark:font-normal">
         {description}
       </p>
       
@@ -107,19 +107,19 @@ export function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="relative py-20 px-8 md:px-16 lg:px-24 bg-black text-white overflow-hidden">
+    <section id="skills" className="relative py-20 px-8 md:px-16 lg:px-24 bg-background text-foreground overflow-hidden">
       {/* Background Paths Animation */}
       <div className="absolute inset-0">
         <BackgroundPathsOnly />
       </div>
       
-      {/* Purple gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black/50 to-purple-800/20" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-100/40 via-white/40 to-blue-100/40 dark:from-purple-900/20 dark:via-black/50 dark:to-purple-800/20" />
       
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
         <motion.h2
-          className="text-4xl font-bold text-center mb-16 text-white"
+          className="text-4xl font-bold text-center mb-16 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -128,7 +128,7 @@ export function SkillsSection() {
           My Skills
         </motion.h2>
         <motion.p
-          className="text-lg text-neutral-300 text-center mb-12 max-w-3xl mx-auto"
+          className="text-lg text-neutral-700 dark:text-neutral-300 text-center mb-12 max-w-3xl mx-auto font-medium"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

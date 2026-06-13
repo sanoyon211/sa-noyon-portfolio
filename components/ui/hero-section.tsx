@@ -3,8 +3,9 @@
 import React, { useRef } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Shape, ExtrudeGeometry } from "three"
+import { useTheme } from "next-themes"
 
-const Box = ({ position, rotation }) => {
+const Box = ({ position, rotation, isLightMode }: { position: [number, number, number]; rotation: [number, number, number]; isLightMode: boolean }) => {
   const shape = new Shape()
   const angleStep = Math.PI * 0.5
   const radius = 1
@@ -27,19 +28,19 @@ const Box = ({ position, rotation }) => {
   return (
     <mesh geometry={geometry} position={position} rotation={rotation}>
       <meshPhysicalMaterial
-        color="#232323"
-        metalness={1}
-        roughness={0.3}
-        reflectivity={0.5}
+        color={isLightMode ? "#ffffff" : "#000000"}
+        metalness={0.1}
+        roughness={0.2}
+        reflectivity={0.9}
         ior={1.5}
         emissive="#000000"
         emissiveIntensity={0}
-        transparent={false}
+        transparent={true}
         opacity={1.0}
-        transmission={0.0}
-        thickness={0.5}
-        clearcoat={0.0}
-        clearcoatRoughness={0.0}
+        transmission={0.9} // Glass effect
+        thickness={1.5}
+        clearcoat={1.0}
+        clearcoatRoughness={0.1}
         sheen={0}
         sheenRoughness={1.0}
         sheenColor="#ffffff"
@@ -58,8 +59,8 @@ const Box = ({ position, rotation }) => {
   )
 }
 
-const AnimatedBoxes = () => {
-  const groupRef = useRef()
+const AnimatedBoxes = ({ isLightMode }: { isLightMode: boolean }) => {
+  const groupRef = useRef<import("three").Group>(null)
   useFrame((state, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.x += delta * 0.05
@@ -67,28 +68,37 @@ const AnimatedBoxes = () => {
   })
 
   const boxes = Array.from({ length: 50 }, (_, index) => ({
-    position: [(index - 25) * 0.75, 0, 0],
-    rotation: [(index - 10) * 0.1, Math.PI / 2, 0],
+    position: [(index - 25) * 0.75, 0, 0] as [number, number, number],
+    rotation: [(index - 10) * 0.1, Math.PI / 2, 0] as [number, number, number],
     id: index,
   }))
 
   return (
     <group ref={groupRef}>
       {boxes.map((box) => (
-        <Box key={box.id} position={box.position} rotation={box.rotation} />
+        <Box key={box.id} position={box.position} rotation={box.rotation} isLightMode={isLightMode} />
       ))}
     </group>
   )
 }
 
 export const Scene = () => {
-  const [cameraPosition, setCameraPosition] = React.useState([5, 5, 20])
+  const [cameraPosition, setCameraPosition] = React.useState<[number, number, number]>([5, 5, 20])
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const isLightMode = mounted && resolvedTheme === "light"
+
   return (
     <div className="w-full h-full z-0">
       <Canvas camera={{ position: cameraPosition, fov: 40 }}>
         <ambientLight intensity={15} />
         <directionalLight position={[10, 10, 5]} intensity={15} />
-        <AnimatedBoxes />
+        <AnimatedBoxes isLightMode={isLightMode} />
       </Canvas>
     </div>
   )

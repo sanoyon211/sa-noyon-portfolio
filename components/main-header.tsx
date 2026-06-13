@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Home, User, Briefcase, Code, Mail, Sparkles, Cpu } from "lucide-react" // ✅ Added Cpu
 import { useState, useEffect } from "react"
+import { ThemeToggle } from "./theme-toggle"
 
 export function MainHeader() {
   const [activeSection, setActiveSection] = useState("home")
@@ -67,10 +68,10 @@ export function MainHeader() {
         isScrolled ? "scale-95" : "scale-100"
       }`}
     >
-      <div className="flex items-center gap-1 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full px-4 py-2 shadow-2xl shadow-black/20">
+      <div className="flex items-center gap-1 bg-white/50 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/20 rounded-full px-4 py-2 shadow-2xl shadow-black/5 dark:shadow-black/20">
         <div className="flex items-center gap-1">
           <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse"></div>
-          <span className="text-white/90 font-semibold text-sm mr-2">SA</span>
+          <span className="text-foreground/90 font-semibold text-sm mr-2">SA</span>
         </div>
 
         <div className="flex items-center gap-1">
@@ -84,8 +85,8 @@ export function MainHeader() {
                 onClick={() => handleNavigation(item.name)}
                 className={`relative group px-3 py-1.5 rounded-full transition-all duration-300 ${
                   isActive
-                    ? "bg-white/20 text-white"
-                    : "text-white/70 hover:text-white hover:bg-white/10"
+                    ? "bg-black/10 text-black dark:bg-white/20 dark:text-white"
+                    : "text-black/70 hover:text-black hover:bg-black/5 dark:text-white/70 dark:hover:text-white dark:hover:bg-white/10"
                 }`}
               >
                 <div className="flex items-center gap-1.5">
@@ -113,6 +114,11 @@ export function MainHeader() {
               </button>
             )
           })}
+        </div>
+
+        {/* Theme Toggle Button */}
+        <div className="ml-1 flex items-center border-l border-black/20 dark:border-white/20 pl-2">
+          <ThemeToggle />
         </div>
       </div>
 

@@ -20,7 +20,7 @@ function FloatingPaths({ position }: { position: number }) {
     return (
         <div className="absolute inset-0 pointer-events-none">
             <svg
-                className="w-full h-full text-white/20"
+                className="w-full h-full text-black/20 dark:text-white/20"
                 viewBox="0 0 696 316"
                 fill="none"
             >
@@ -33,11 +33,12 @@ function FloatingPaths({ position }: { position: number }) {
                         strokeWidth={path.width}
                         strokeOpacity={0.1 + path.id * 0.03}
                         initial={{ pathLength: 0.3, opacity: 0.6 }}
-                        animate={{
+                        whileInView={{
                             pathLength: 1,
                             opacity: [0.3, 0.6, 0.3],
                             pathOffset: [0, 1, 0],
                         }}
+                        viewport={{ once: false, amount: 0 }}
                         transition={{
                             duration: 20 + Math.random() * 10,
                             repeat: Number.POSITIVE_INFINITY,

@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react"
+import { useTheme } from "next-themes"
 
 interface SquaresProps {
   direction?: "right" | "left" | "up" | "down" | "diagonal"
@@ -18,14 +19,22 @@ export function Squares({
   className,
 }: SquaresProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const requestRef = useRef<number>()
-  const numSquaresX = useRef<number>()
-  const numSquaresY = useRef<number>()
+  const requestRef = useRef<number>(0)
+  const numSquaresX = useRef<number>(0)
+  const numSquaresY = useRef<number>(0)
   const gridOffset = useRef({ x: 0, y: 0 })
   const [hoveredSquare, setHoveredSquare] = useState<{
     x: number
     y: number
   } | null>(null)
+
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme !== "light"
+  
+  const effectiveBorderColor = borderColor === "#333" && !isDark ? "#e5e7eb" : borderColor
+  const effectiveHoverFillColor = hoverFillColor === "#222" && !isDark ? "#f3f4f6" : hoverFillColor
+  const bgColor = isDark ? "#060606" : "#ffffff"
+  const bgRgb = isDark ? "6, 6, 6" : "255, 255, 255"
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -35,7 +44,7 @@ export function Squares({
     if (!ctx) return
 
     // Set canvas background
-    canvas.style.background = "#060606"
+    canvas.style.background = bgColor
 
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth
@@ -65,11 +74,11 @@ export function Squares({
             Math.floor((x - startX) / squareSize) === hoveredSquare.x &&
             Math.floor((y - startY) / squareSize) === hoveredSquare.y
           ) {
-            ctx.fillStyle = hoverFillColor
+            ctx.fillStyle = effectiveHoverFillColor
             ctx.fillRect(squareX, squareY, squareSize, squareSize)
           }
 
-          ctx.strokeStyle = borderColor
+          ctx.strokeStyle = effectiveBorderColor
           ctx.strokeRect(squareX, squareY, squareSize, squareSize)
         }
       }
@@ -82,14 +91,28 @@ export function Squares({
         canvas.height / 2,
         Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) / 2,
       )
-      gradient.addColorStop(0, "rgba(6, 6, 6, 0)")
-      gradient.addColorStop(1, "#060606")
+      gradient.addColorStop(0, `rgba(${bgRgb}, 0)`)
+      gradient.addColorStop(1, bgColor)
 
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
+    let isVisible = true
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+      },
+      { threshold: 0 }
+    )
+    if (canvas) observer.observe(canvas)
+
     const updateAnimation = () => {
+      if (!isVisible) {
+        requestRef.current = requestAnimationFrame(updateAnimation)
+        return
+      }
+
       const effectiveSpeed = Math.max(speed, 0.1)
 
       switch (direction) {
@@ -157,11 +180,12 @@ export function Squares({
       window.removeEventListener("resize", resizeCanvas)
       canvas.removeEventListener("mousemove", handleMouseMove)
       canvas.removeEventListener("mouseleave", handleMouseLeave)
+      observer.disconnect()
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current)
       }
     }
-  }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, squareSize])
+  }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, squareSize, isDark, bgColor, bgRgb, effectiveBorderColor, effectiveHoverFillColor])
 
   return (
     <canvas

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export function TechnologiesSection() {
   const technologies = [
@@ -21,15 +22,15 @@ export function TechnologiesSection() {
   return (
     <section
       id="technologies"
-      className="relative py-24 px-8 md:px-16 lg:px-24 bg-gradient-to-b from-gray-950 via-black to-gray-900 text-white overflow-hidden"
+      className="relative py-24 px-8 md:px-16 lg:px-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-900 text-foreground overflow-hidden"
     >
       {/* Glowing gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.1),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_60%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Title animation */}
         <motion.h2
-          className="text-5xl font-extrabold mb-16 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent"
+          className="text-5xl font-extrabold mb-16 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 dark:from-blue-400 dark:via-cyan-400 dark:to-purple-500 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -55,13 +56,15 @@ export function TechnologiesSection() {
               className="flex flex-col items-center gap-3 group"
             >
               <div className="relative">
-                <img
+                <Image
                   src={tech.image}
                   alt={tech.name}
-                  className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.15)] group-hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 object-contain drop-shadow-sm dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)] group-hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all duration-300"
                 />
               </div>
-              <p className="text-sm font-medium text-gray-300 group-hover:text-blue-400 transition-colors duration-300">
+              <p className="text-sm font-medium text-neutral-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                 {tech.name}
               </p>
             </motion.div>
