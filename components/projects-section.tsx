@@ -71,7 +71,7 @@ export function ProjectsSection() {
           Here are some of my recent projects that showcase my skills in full-stack development, UI/UX design, and
           problem-solving.
         </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentProjects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -87,12 +87,13 @@ export function ProjectsSection() {
                   alt={project.title}
                   width={500}
                   height={300}
-                  className="w-full h-48 object-contain bg-gray-900"
+                  className="w-full h-44 object-cover bg-neutral-100 dark:bg-gray-900"
                 />
-                <div className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+                {/* Desktop Hover Overlay */}
+                <div className="absolute inset-0 bg-background/60 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex flex-row items-center justify-center gap-4 backdrop-blur-[2px]">
                   <Button
                     size="sm"
-                    className="bg-white text-black hover:bg-white/90"
+                    className="bg-white text-black hover:bg-white/90 shadow-lg font-medium"
                     onClick={() => window.open(project.liveUrl, "_blank")}
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
@@ -101,7 +102,7 @@ export function ProjectsSection() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-white text-foreground hover:bg-white hover:text-black bg-transparent"
+                    className="border-white text-white hover:bg-white hover:text-black bg-black/40 backdrop-blur-sm shadow-lg font-medium"
                     onClick={() => window.open(project.githubUrl, "_blank")}
                   >
                     <Github className="w-4 h-4 mr-2" />
@@ -109,10 +110,10 @@ export function ProjectsSection() {
                   </Button>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-foreground">{project.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 leading-relaxed font-medium dark:font-normal">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+              <div className="p-5">
+                <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-foreground">{project.title}</h3>
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 leading-relaxed font-medium dark:font-normal">{project.description}</p>
+                <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
@@ -121,6 +122,27 @@ export function ProjectsSection() {
                       {tech}
                     </span>
                   ))}
+                </div>
+                
+                {/* Mobile Action Buttons */}
+                <div className="flex lg:hidden items-center gap-2 mt-4">
+                  <Button
+                    size="sm"
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none shadow-md"
+                    onClick={() => window.open(project.liveUrl, "_blank")}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Live
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 border-neutral-300 dark:border-neutral-700 dark:text-neutral-200"
+                    onClick={() => window.open(project.githubUrl, "_blank")}
+                  >
+                    <Github className="w-4 h-4 mr-2" />
+                    Code
+                  </Button>
                 </div>
               </div>
             </motion.div>

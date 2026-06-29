@@ -51,4 +51,20 @@ export const projects = [
     liveUrl: 'https://inkwell-the-blog.netlify.app',
     githubUrl: 'https://github.com/sanoyon211/inkwell.git',
   },
+  {
+    title: 'E-Commerce Dashboard (Demo)',
+    description: 'A responsive admin dashboard for managing products, users, and orders. Features beautiful charts and data tables.',
+    image: '/images/placeholder-1.png',
+    technologies: ['Next.js', 'Tailwind CSS', 'Recharts'],
+    liveUrl: '#',
+    githubUrl: '#',
+  },
+  {
+    title: 'Task Management App (Demo)',
+    description: 'A full-stack Kanban style task management tool with drag-and-drop functionality and real-time updates.',
+    image: '/images/placeholder-2.png',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
+    liveUrl: '#',
+    githubUrl: '#',
+  }
 ];

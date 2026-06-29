@@ -1,7 +1,12 @@
 "use client"
 
-import { Scene } from "@/components/ui/hero-section"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
+import { portfolioData } from "@/data/portfolio"
+
+const Scene = dynamic(() => import("@/components/ui/hero-section").then((mod) => mod.Scene), {
+  ssr: false,
+})
 import { Cpu, ShieldCheck, Layers, Zap } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 import { useState, useEffect } from "react"
@@ -89,10 +94,7 @@ const cardVariants: Variants = {
 const HeroDemo = () => {
   const [isAnimationComplete, setIsAnimationComplete] = useState(false)
 
-  const headingText = "Hi, I'm"
-  const nameText = "Md Sohab Akter Noyon"
-  const subheadingText = "Building the future, one line of code at a time."
-  const descriptionText = "Passionate about building secure and creative web solutions using modern technologies."
+  const { headingText, nameText, subheadingText, descriptionText } = portfolioData.hero
 
   // Reset animation state on component mount
   useEffect(() => {
@@ -128,35 +130,39 @@ const HeroDemo = () => {
         <div className="flex flex-col items-center text-center space-y-6">
           <div className="space-y-4 flex items-center justify-center flex-col relative">
             
-            <motion.h1
-              className="text-2xl md:text-5xl lg:text-6xl font-semibold tracking-tight max-w-4xl"
+            <motion.div
+              className="flex flex-col items-center justify-center space-y-2 md:space-y-4 max-w-4xl"
               variants={containerVariants}
               initial="hidden"
               animate={isAnimationComplete ? "visible" : "hidden"}
             >
-              {headingText.split(" ").map((word, i) => (
+              <div className="text-lg md:text-2xl font-medium text-neutral-600 dark:text-neutral-400">
+                {headingText.split(" ").map((word, i) => (
+                  <motion.span
+                    key={i}
+                    variants={wordVariants}
+                    className="inline-block mr-1.5"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-center">
                 <motion.span
-                  key={i}
                   variants={wordVariants}
-                  className="inline-block mr-2"
+                  className="inline-block bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm pb-2"
                 >
-                  {word}
+                  {nameText}
                 </motion.span>
-              ))}
-              <br />
-              <motion.span
-                variants={wordVariants}
-                className="inline-block mr-2 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm pb-2"
-              >
-                {nameText}
-              </motion.span>
-              <br />
-              {subheadingText.split(" ").map((word, i) => (
-                <motion.span key={i} variants={wordVariants} className="inline-block mr-2">
-                  {word}
-                </motion.span>
-              ))}
-            </motion.h1>
+              </h1>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-neutral-800 dark:text-neutral-200 text-center leading-snug">
+                {subheadingText.split(" ").map((word, i) => (
+                  <motion.span key={i} variants={wordVariants} className="inline-block mr-1.5">
+                    {word}
+                  </motion.span>
+                ))}
+              </h2>
+            </motion.div>
             <motion.p
               className="text-base md:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl font-medium"
               variants={containerVariants}
