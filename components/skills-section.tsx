@@ -90,11 +90,6 @@ export function SkillsSection() {
     },
 
     {
-      title: 'Mobile Development',
-      description: 'React Native, Progressive Web Apps, Responsive Design',
-      icon: <IconDeviceMobile className="w-6 h-6" />,
-    },
-    {
       title: 'Programming Languages',
       description: 'JavaScript',
       icon: <IconBrandPython className="w-6 h-6" />,
