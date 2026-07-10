@@ -73,7 +73,7 @@ export function SkillsSection() {
 
     {
       title: 'Backend Development',
-      description: 'Node.js, Express.js, MongoDB, PostgreSQL, RESTful APIs',
+      description: 'Node.js, Express.js, MongoDB, RESTful APIs',
       icon: <IconBrandNodejs className="w-6 h-6" />,
     },
 
