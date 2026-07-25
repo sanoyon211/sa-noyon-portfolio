@@ -75,24 +75,13 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            
-            {/* Live Indicator */}
-            {project.liveUrl && project.liveUrl !== "#" && (
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-3 py-1 bg-emerald-500/90 text-white text-xs font-semibold rounded-full shadow-lg backdrop-blur-md flex items-center gap-1.5 animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-white" />
-                Live Project
-              </div>
-            )}
           </div>
 
           {/* Dialog Header Title */}
           <DialogHeader className="text-left space-y-2">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              <DialogTitle className="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
-                {project.title}
-              </DialogTitle>
-            </div>
+            <DialogTitle className="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
+              {project.title}
+            </DialogTitle>
           </DialogHeader>
 
           {/* Tech Stack Badges */}

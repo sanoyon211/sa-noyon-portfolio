@@ -161,8 +161,8 @@ export function ProjectsSection() {
                   </div>
                 </div>
 
-                {/* Card Action Buttons (Mobile & Responsive Footer) */}
-                <div className="flex items-center gap-2 pt-2 border-t border-neutral-200/50 dark:border-neutral-800/50">
+                {/* Card Action Buttons (Mobile & Tablet Only) */}
+                <div className="flex lg:hidden items-center gap-2 pt-2 border-t border-neutral-200/50 dark:border-neutral-800/50">
                   {project.liveUrl && project.liveUrl !== "#" && (
                     <Button
                       size="sm"
