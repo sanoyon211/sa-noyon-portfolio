@@ -165,9 +165,8 @@ export function ProjectsSection() {
                 <div className="flex lg:hidden items-center gap-2 pt-2 border-t border-neutral-200/50 dark:border-neutral-800/50">
                   {project.liveUrl && project.liveUrl !== "#" && (
                     <Button
-                      size="sm"
                       variant="outline"
-                      className="flex-1 border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-semibold"
+                      className="flex-1 h-10 px-3 border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-semibold rounded-lg"
                       onClick={() => window.open(project.liveUrl, "_blank")}
                     >
                       <ExternalLink className="w-3.5 h-3.5 mr-1 text-purple-500" />
@@ -175,8 +174,7 @@ export function ProjectsSection() {
                     </Button>
                   )}
                   <Button
-                    size="sm"
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm border-none"
+                    className="flex-1 h-10 px-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm border-none rounded-lg"
                     onClick={() => handleOpenDetails(project)}
                   >
                     <Eye className="w-3.5 h-3.5 mr-1" />

@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github, Code2, Server, Globe, Sparkles } from "lucide-react"
+import { ExternalLink, Github, Code2, Server, Globe } from "lucide-react"
 import Image from "next/image"
 import { Project } from "@/data/projects"
 
@@ -112,18 +112,17 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
           </div>
 
           {/* Dynamic Action Buttons */}
-          <div className="border-t border-neutral-200/60 dark:border-neutral-800/80 pt-5 flex flex-col sm:flex-row flex-wrap items-center gap-3">
+          <div className="border-t border-neutral-200/60 dark:border-neutral-800/80 pt-5 flex flex-col sm:flex-row flex-wrap items-center gap-3.5">
             
             {/* Live Demo Button */}
             {project.liveUrl && project.liveUrl !== "#" && (
               <Button
-                size="lg"
-                className="w-full sm:w-auto flex-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg shadow-purple-500/20 border-none transition-all duration-300"
+                className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-500/20 border-none transition-all duration-300 active:scale-[0.98]"
                 onClick={() => window.open(project.liveUrl, "_blank")}
               >
-                <Globe className="w-4 h-4 mr-2" />
+                <Globe className="w-5 h-5 mr-2" />
                 Live Demo
-                <ExternalLink className="w-3.5 h-3.5 ml-1.5 opacity-80" />
+                <ExternalLink className="w-4 h-4 ml-2 opacity-80" />
               </Button>
             )}
 
@@ -131,25 +130,23 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
             {showBothRepos && (
               <>
                 <Button
-                  size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto flex-1 border-neutral-300 dark:border-neutral-700 bg-white/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition-all"
+                  className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl border-neutral-300 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-sm sm:text-base transition-all active:scale-[0.98]"
                   onClick={() => window.open(project.githubClientUrl, "_blank")}
                 >
-                  <Code2 className="w-4 h-4 mr-2 text-purple-500" />
+                  <Code2 className="w-5 h-5 mr-2 text-purple-500" />
                   Client Repo
-                  <Github className="w-3.5 h-3.5 ml-1.5 opacity-70" />
+                  <Github className="w-4 h-4 ml-2 opacity-70" />
                 </Button>
 
                 <Button
-                  size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto flex-1 border-neutral-300 dark:border-neutral-700 bg-white/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition-all"
+                  className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl border-neutral-300 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-sm sm:text-base transition-all active:scale-[0.98]"
                   onClick={() => window.open(project.githubServerUrl, "_blank")}
                 >
-                  <Server className="w-4 h-4 mr-2 text-blue-500" />
+                  <Server className="w-5 h-5 mr-2 text-blue-500" />
                   Server Repo
-                  <Github className="w-3.5 h-3.5 ml-1.5 opacity-70" />
+                  <Github className="w-4 h-4 ml-2 opacity-70" />
                 </Button>
               </>
             )}
@@ -157,12 +154,11 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
             {/* Case 2: Only Client Repo */}
             {showSingleClient && (
               <Button
-                size="lg"
                 variant="outline"
-                className="w-full sm:w-auto flex-1 border-neutral-300 dark:border-neutral-700 bg-white/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition-all"
+                className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl border-neutral-300 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-sm sm:text-base transition-all active:scale-[0.98]"
                 onClick={() => window.open(project.githubClientUrl, "_blank")}
               >
-                <Github className="w-4 h-4 mr-2" />
+                <Github className="w-5 h-5 mr-2" />
                 GitHub Repo
               </Button>
             )}
@@ -170,26 +166,24 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
             {/* Case 3: Only Server Repo */}
             {showSingleServer && (
               <Button
-                size="lg"
                 variant="outline"
-                className="w-full sm:w-auto flex-1 border-neutral-300 dark:border-neutral-700 bg-white/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition-all"
+                className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl border-neutral-300 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-sm sm:text-base transition-all active:scale-[0.98]"
                 onClick={() => window.open(project.githubServerUrl, "_blank")}
               >
-                <Server className="w-4 h-4 mr-2 text-blue-500" />
+                <Server className="w-5 h-5 mr-2 text-blue-500" />
                 Server Repo
-                <Github className="w-3.5 h-3.5 ml-1.5 opacity-70" />
+                <Github className="w-4 h-4 ml-2 opacity-70" />
               </Button>
             )}
 
             {/* Case 4: Generic Single githubUrl */}
             {hasSingleGithub && (
               <Button
-                size="lg"
                 variant="outline"
-                className="w-full sm:w-auto flex-1 border-neutral-300 dark:border-neutral-700 bg-white/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition-all"
+                className="w-full sm:w-auto flex-1 h-12 px-6 rounded-xl border-neutral-300 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-sm sm:text-base transition-all active:scale-[0.98]"
                 onClick={() => window.open(project.githubUrl, "_blank")}
               >
-                <Github className="w-4 h-4 mr-2" />
+                <Github className="w-5 h-5 mr-2" />
                 GitHub Repo
               </Button>
             )}
