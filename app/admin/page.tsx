@@ -14,6 +14,8 @@ type Project = {
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
+  githubClientUrl?: string;
+  githubServerUrl?: string;
   order?: number;
 };
 
@@ -34,6 +36,8 @@ export default function AdminPage() {
     technologies: '',
     liveUrl: '',
     githubUrl: '',
+    githubClientUrl: '',
+    githubServerUrl: '',
     order: 100
   })
 
@@ -125,6 +129,21 @@ export default function AdminPage() {
     }
   }
 
+  const resetForm = () => {
+    setEditingId(null)
+    setFormData({
+      title: '',
+      description: '',
+      image: '',
+      technologies: '',
+      liveUrl: '',
+      githubUrl: '',
+      githubClientUrl: '',
+      githubServerUrl: '',
+      order: 100
+    })
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -152,8 +171,7 @@ export default function AdminPage() {
 
       if (res.ok) {
         toast.success(editingId ? "Project updated!" : "Project added!")
-        setFormData({ title: '', description: '', image: '', technologies: '', liveUrl: '', githubUrl: '', order: 100 })
-        setEditingId(null)
+        resetForm()
         fetchProjects(password)
       } else {
         if (res.status === 401) handleLogout()
@@ -173,6 +191,8 @@ export default function AdminPage() {
       technologies: project.technologies.join(', '),
       liveUrl: project.liveUrl || '',
       githubUrl: project.githubUrl || '',
+      githubClientUrl: project.githubClientUrl || '',
+      githubServerUrl: project.githubServerUrl || '',
       order: project.order || 100
     })
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -248,12 +268,20 @@ export default function AdminPage() {
                 )}
               </div>
               <div>
-                <label className="block text-sm mb-1 text-neutral-400">Live URL</label>
-                <Input value={formData.liveUrl} onChange={e => setFormData({...formData, liveUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
+                <label className="block text-sm mb-1 text-neutral-400">Live Demo URL</label>
+                <Input placeholder="https://example.com" value={formData.liveUrl} onChange={e => setFormData({...formData, liveUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
               </div>
               <div>
-                <label className="block text-sm mb-1 text-neutral-400">GitHub URL</label>
-                <Input value={formData.githubUrl} onChange={e => setFormData({...formData, githubUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
+                <label className="block text-sm mb-1 text-neutral-400">Single GitHub URL (if not separated)</label>
+                <Input placeholder="https://github.com/username/repo" value={formData.githubUrl} onChange={e => setFormData({...formData, githubUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
+              </div>
+              <div>
+                <label className="block text-sm mb-1 text-neutral-400">Client Side GitHub URL</label>
+                <Input placeholder="https://github.com/username/client-repo" value={formData.githubClientUrl} onChange={e => setFormData({...formData, githubClientUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
+              </div>
+              <div>
+                <label className="block text-sm mb-1 text-neutral-400">Server Side GitHub URL</label>
+                <Input placeholder="https://github.com/username/server-repo" value={formData.githubServerUrl} onChange={e => setFormData({...formData, githubServerUrl: e.target.value})} className="bg-neutral-800 border-neutral-700" />
               </div>
             </div>
             
@@ -277,7 +305,7 @@ export default function AdminPage() {
                 {editingId ? 'Update Project' : 'Save Project'}
               </Button>
               {editingId && (
-                <Button type="button" variant="outline" onClick={() => { setEditingId(null); setFormData({title: '', description: '', image: '', technologies: '', liveUrl: '', githubUrl: '', order: 100})}}>
+                <Button type="button" variant="outline" onClick={resetForm}>
                   Cancel
                 </Button>
               )}
@@ -298,6 +326,11 @@ export default function AdminPage() {
                        <span className="bg-purple-600/20 text-purple-400 px-2 py-0.5 rounded text-xs">Order: {project.order || 100}</span>
                     </div>
                     <p className="text-sm text-neutral-400 mt-1 sm:mt-0 line-clamp-2">{project.description}</p>
+                    <div className="flex gap-3 text-xs text-neutral-500 mt-2">
+                      {project.liveUrl && <span>🌐 Live</span>}
+                      {project.githubClientUrl && <span>💻 Client</span>}
+                      {project.githubServerUrl && <span>⚙️ Server</span>}
+                    </div>
                   </div>
                   <div className="flex gap-2 shrink-0 w-full sm:w-auto">
                     <Button onClick={() => handleEdit(project)} variant="secondary" size="sm" className="flex-1 sm:flex-none">Edit</Button>

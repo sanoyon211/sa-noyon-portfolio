@@ -9,19 +9,7 @@ export function ExperienceSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
-    {
-      title: 'Experience',
-      icon: <Briefcase className="w-8 h-8" />,
-      items: [
-        {
-          title: 'Industrial Trainee',
-          company: 'BD Calling IT Industry, Mohakhali (On-site)',
-          period: '2025',
-          description:
-            'Completed industrial training in front-end web development using HTML, CSS, JavaScript and React.js. Gained hands-on experience in real-world project application and teamwork in a professional environment.',
-        },
-      ],
-    },
+
     {
       title: 'Education',
       icon: <GraduationCap className="w-8 h-8" />,
@@ -43,7 +31,7 @@ export function ExperienceSection() {
         {
           title: 'Online Courses & Bootcamps',
           company: 'Various Platforms',
-          period: '2019 - Present',
+          period: '2026 - Present',
           description:
             'Completed multiple online courses in React and modern web development from platforms like Programming Hero and YouTube.',
         },

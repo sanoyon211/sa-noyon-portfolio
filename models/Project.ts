@@ -5,7 +5,7 @@ const ProjectSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, 'Please provide a title for this project.'],
-      maxlength: [60, 'Title cannot be more than 60 characters'],
+      maxlength: [100, 'Title cannot be more than 100 characters'],
     },
     description: {
       type: String,
@@ -24,6 +24,12 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
     },
     githubUrl: {
+      type: String,
+    },
+    githubClientUrl: {
+      type: String,
+    },
+    githubServerUrl: {
       type: String,
     },
     order: {

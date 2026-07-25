@@ -14,7 +14,7 @@ export function TechnologiesSection() {
     { name: 'Next.js', image: '/images/nextjs.png' },
     { name: 'MongoDB', image: '/images/mongodb.png' },
     { name: 'VS Code', image: '/images/vscode.png' },
-    { name: 'ChatGPT', image: '/images/chatgpt.png' },
+    { name: 'ChatGPT', image: '/images/Chatgpt.png' },
     { name: 'Gemini', image: '/images/gemini.png' },
     { name: 'Github', image: '/images/github.png' },
   ];

@@ -3,14 +3,18 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Squares } from "@/components/ui/squares-background"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Eye } from "lucide-react"
 import Image from "next/image"
-import { projects as staticProjects } from "@/data/projects"
+import { projects as staticProjects, Project } from "@/data/projects"
 import { useState, useEffect } from "react"
+import { ProjectDetailsModal } from "@/components/project-details-modal"
 
 export function ProjectsSection() {
-  const [projectsList, setProjectsList] = useState(staticProjects);
+  const [projectsList, setProjectsList] = useState<Project[]>(staticProjects);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -35,6 +39,11 @@ export function ProjectsSection() {
 
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleOpenDetails = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
   };
 
   return (
@@ -68,82 +77,113 @@ export function ProjectsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Here are some of my recent projects that showcase my skills in full-stack development, UI/UX design, and
-          problem-solving.
+          Explore my recent work spanning web applications, e-commerce, and SaaS platforms. Click View Details for full specifications.
         </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {currentProjects.map((project, index) => (
             <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
+              key={project.title + index}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-lg overflow-hidden hover:bg-white/80 dark:hover:bg-white/10 transition-all duration-300 group hover:scale-105 shadow-sm dark:shadow-none"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md border border-neutral-200/80 dark:border-neutral-800/80 rounded-xl overflow-hidden hover:border-purple-500/50 dark:hover:border-purple-500/50 transition-all duration-300 group shadow-sm hover:shadow-xl flex flex-col justify-between"
             >
-              <div className="relative overflow-hidden">
+              {/* Image & Desktop Hover Actions */}
+              <div 
+                className="relative overflow-hidden cursor-pointer h-48 sm:h-52"
+                onClick={() => handleOpenDetails(project)}
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
                   width={500}
                   height={300}
-                  className="w-full h-44 object-cover bg-neutral-100 dark:bg-gray-900"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 bg-neutral-100 dark:bg-neutral-900"
                 />
+                
                 {/* Desktop Hover Overlay */}
-                <div className="absolute inset-0 bg-background/60 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex flex-row items-center justify-center gap-4 backdrop-blur-[2px]">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex flex-row items-center justify-center gap-3 backdrop-blur-[2px]">
+                  {project.liveUrl && project.liveUrl !== "#" && (
+                    <Button
+                      size="sm"
+                      className="bg-white text-black hover:bg-white/90 shadow-md font-medium"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(project.liveUrl, "_blank");
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-1.5" />
+                      Live Demo
+                    </Button>
+                  )}
                   <Button
                     size="sm"
-                    className="bg-white text-black hover:bg-white/90 shadow-lg font-medium"
-                    onClick={() => window.open(project.liveUrl, "_blank")}
+                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-md font-medium"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenDetails(project);
+                    }}
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-black bg-black/40 backdrop-blur-sm shadow-lg font-medium"
-                    onClick={() => window.open(project.githubUrl, "_blank")}
-                  >
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
+                    <Eye className="w-4 h-4 mr-1.5" />
+                    View Details
                   </Button>
                 </div>
               </div>
-              <div className="p-5">
-                <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-foreground">{project.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 leading-relaxed font-medium dark:font-normal">{project.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 rounded-full text-xs text-neutral-800 dark:text-neutral-200 font-medium dark:font-normal"
+
+              {/* Card Body */}
+              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                <div>
+                  <h3 
+                    className="text-lg font-bold text-neutral-900 dark:text-white mb-2 cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    onClick={() => handleOpenDetails(project)}
+                  >
+                    {project.title}
+                  </h3>
+                  
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {project.technologies.slice(0, 5).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800/80 border border-neutral-200/80 dark:border-neutral-700/60 rounded-md text-xs font-medium text-neutral-700 dark:text-neutral-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 5 && (
+                      <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800/80 rounded-md text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                        +{project.technologies.length - 5} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Card Action Buttons (Mobile & Responsive Footer) */}
+                <div className="flex items-center gap-2 pt-2 border-t border-neutral-200/50 dark:border-neutral-800/50">
+                  {project.liveUrl && project.liveUrl !== "#" && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-semibold"
+                      onClick={() => window.open(project.liveUrl, "_blank")}
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Mobile Action Buttons */}
-                <div className="flex lg:hidden items-center gap-2 mt-4">
+                      <ExternalLink className="w-3.5 h-3.5 mr-1 text-purple-500" />
+                      Live Demo
+                    </Button>
+                  )}
                   <Button
                     size="sm"
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none shadow-md"
-                    onClick={() => window.open(project.liveUrl, "_blank")}
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm border-none"
+                    onClick={() => handleOpenDetails(project)}
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1 border-neutral-300 dark:border-neutral-700 dark:text-neutral-200"
-                    onClick={() => window.open(project.githubUrl, "_blank")}
-                  >
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
+                    <Eye className="w-3.5 h-3.5 mr-1" />
+                    View Details
                   </Button>
                 </div>
+
               </div>
             </motion.div>
           ))}
@@ -178,6 +218,13 @@ export function ProjectsSection() {
           </div>
         )}
       </div>
+
+      {/* Project Details Modal */}
+      <ProjectDetailsModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   )
 }
