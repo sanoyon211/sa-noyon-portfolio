@@ -7,7 +7,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'SA Noyon | Frontend Developer',
+  metadataBase: new URL('https://sanoyon.com'),
+  title: 'SA Noyon | Full-Stack Developer',
   description:
     'Portfolio of SA Noyon, a passionate Frontend Developer specializing in React, Next.js, and modern web development.',
   keywords: [

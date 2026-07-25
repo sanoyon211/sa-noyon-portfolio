@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github, Code2, Server, Globe } from "lucide-react"
+import { PurpleFlowingLights } from "@/components/ui/purple-flowing-lights"
 import Image from "next/image"
 import { Project } from "@/data/projects"
 
@@ -29,37 +30,9 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-w-[95vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl p-0 overflow-hidden bg-white/95 dark:bg-[#0a0a0c]/95 border border-neutral-200/80 dark:border-neutral-800/80 shadow-2xl backdrop-blur-xl rounded-2xl max-h-[90vh] flex flex-col transition-all duration-300">
         
-        {/* Animated Background Orbs */}
+        {/* Purple Flowing Lights Background Animation */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-              x: [0, 50, 0],
-              y: [0, -30, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -top-20 -left-20 w-72 h-72 bg-purple-500/20 dark:bg-purple-600/30 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.15, 0.35, 0.15],
-              x: [0, -40, 0],
-              y: [0, 40, 0],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-500/20 dark:bg-blue-600/30 rounded-full blur-3xl"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] dark:opacity-[0.07]" />
+          <PurpleFlowingLights />
         </div>
 
         {/* Scrollable Container */}

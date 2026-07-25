@@ -17,10 +17,9 @@ export const portfolioData = {
     infoCards: [
       { label: "Age", value: "22" },
       { label: "Location", value: "Bangladesh" },
-      { label: "Experience", value: "Fresher (Industrial Trainee — BD Calling IT Industry)" },
     ],
-    resumeUrl: "/Md_Sohab_Akter_Noyon_FrontEnd_Developer.pdf",
-    resumeFilename: "Md_Sohab_Akter_Noyon_FrontEnd_Developer.pdf",
+    resumeUrl: "/SA_Noyon_Resume_Full_Stack_Developer.pdf",
+    resumeFilename: "SA_Noyon_Resume_Full_Stack_Developer.pdf",
     imageSrc: "/images/sa-noyon.jpg",
   },
 };

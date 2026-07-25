@@ -1,12 +1,8 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { portfolioData } from "@/data/portfolio"
-
-const Scene = dynamic(() => import("@/components/ui/hero-section").then((mod) => mod.Scene), {
-  ssr: false,
-})
+import { Squares } from "@/components/ui/squares-background"
 import { Cpu, ShieldCheck, Layers, Zap } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 import { useState, useEffect } from "react"
@@ -121,10 +117,10 @@ const HeroDemo = () => {
   }
 
   return (
-    <section className="min-h-screen w-full bg-[#f8fafc] dark:bg-[#09090b] text-black dark:text-white flex flex-col items-center justify-center p-4 md:p-6 relative overflow-hidden pt-16">
+    <section className="min-h-[85vh] lg:min-h-[700px] lg:max-h-[850px] w-full bg-[#f8fafc] dark:bg-[#09090b] text-black dark:text-white flex flex-col items-center justify-center p-4 md:p-6 py-16 md:py-20 relative overflow-hidden">
       {/* Premium Background Blobs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-400/10 dark:bg-purple-600/20 rounded-full blur-[120px] -z-10 animate-blob"></div>
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[150px] -z-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-400/10 dark:bg-purple-600/20 rounded-full blur-[100px] -z-10 animate-blob transform-gpu"></div>
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[100px] -z-10 animate-blob animation-delay-2000 transform-gpu"></div>
       
       <div className="w-full max-w-6xl space-y-8 relative z-10">
         <div className="flex flex-col items-center text-center space-y-6">
@@ -223,8 +219,15 @@ const HeroDemo = () => {
           ))}
         </motion.div>
       </div>
-      <div className="absolute inset-0">
-        <Scene />
+      {/* Squares Background Animation */}
+      <div className="absolute inset-0 z-0">
+        <Squares 
+          direction="diagonal"
+          speed={0.3}
+          squareSize={50}
+          borderColor="#333" 
+          hoverFillColor="#222"
+        />
       </div>
     </section>
   )
