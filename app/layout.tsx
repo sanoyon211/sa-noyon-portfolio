@@ -48,6 +48,35 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Md Sohab Akter Noyon',
+  alternateName: 'SA Noyon',
+  url: 'https://sanoyon.com',
+  image: 'https://sanoyon.com/images/sa-noyon.jpg',
+  jobTitle: 'Full-Stack Web Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Freelance / Self-Employed',
+  },
+  sameAs: [
+    'https://github.com/sanoyon211',
+    'https://www.linkedin.com/in/sa-noyon/',
+    'https://www.facebook.com/sa.noyon.602467',
+  ],
+  knowsAbout: [
+    'React',
+    'Next.js',
+    'JavaScript',
+    'TypeScript',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Tailwind CSS',
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +92,10 @@ html {
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <ThemeProvider

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -41,13 +42,24 @@ export default function AdminPage() {
     order: 100
   })
 
-  // Check auth on load
+  // Check auth on load (both localStorage token & cookie session)
   useEffect(() => {
     const token = localStorage.getItem('admin_token')
     if (token) {
       setPassword(token)
       setIsAuthenticated(true)
       fetchProjects(token)
+    } else {
+      // Check if session cookie is active
+      fetch('/api/auth')
+        .then(res => res.json())
+        .then(data => {
+          if (data.authenticated) {
+            setIsAuthenticated(true)
+            fetchProjects('')
+          }
+        })
+        .catch(() => {})
     }
   }, [])
 
@@ -73,16 +85,26 @@ export default function AdminPage() {
     }
   }
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth', { method: 'DELETE' })
+    } catch {
+      // ignore
+    }
     localStorage.removeItem('admin_token')
     setIsAuthenticated(false)
     setPassword('')
+    toast.success("Logged out")
   }
 
-  const fetchProjects = async (token: string) => {
+  const fetchProjects = async (token?: string) => {
     setIsLoading(true)
     try {
-      const res = await fetch('/api/projects')
+      const headers: Record<string, string> = {}
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`
+      }
+      const res = await fetch('/api/projects', { headers })
       const json = await res.json()
       if (json.success) {
         setProjects(json.data)
@@ -263,7 +285,7 @@ export default function AdminPage() {
                 </div>
                 {formData.image && !isUploading && (
                   <div className="mt-2 relative w-32 h-20 rounded overflow-hidden border border-neutral-700">
-                    <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                    <Image src={formData.image} alt="Preview" fill className="object-cover" unoptimized />
                   </div>
                 )}
               </div>

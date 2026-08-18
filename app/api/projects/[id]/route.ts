@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Project from '@/models/Project';
+import { isAuthenticatedAdmin } from '@/lib/auth';
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await params;
-    const authHeader = req.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
+    const isAuth = await isAuthenticatedAdmin(req);
+    if (!isAuth) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await dbConnect();
     const body = await req.json();
     const project = await Project.findByIdAndUpdate(id, body, {
@@ -27,12 +28,12 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 
 export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await params;
-    const authHeader = req.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
+    const isAuth = await isAuthenticatedAdmin(req);
+    if (!isAuth) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await dbConnect();
     const deletedProject = await Project.deleteOne({ _id: id });
     if (!deletedProject.deletedCount) {
@@ -43,3 +44,4 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     return NextResponse.json({ success: false, error: 'Failed to delete project' }, { status: 400 });
   }
 }
+

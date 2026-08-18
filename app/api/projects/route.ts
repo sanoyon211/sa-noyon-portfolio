@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Project from '@/models/Project';
+import { isAuthenticatedAdmin } from '@/lib/auth';
 
 export async function GET() {
   try {
@@ -14,9 +15,8 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    // Basic auth check
-    const authHeader = req.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
+    const isAuth = await isAuthenticatedAdmin(req);
+    if (!isAuth) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -28,3 +28,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: 'Failed to create project' }, { status: 400 });
   }
 }
+
