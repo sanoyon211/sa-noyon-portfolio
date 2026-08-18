@@ -89,11 +89,29 @@ const cardVariants: Variants = {
 
 const HeroDemo = () => {
   const [isAnimationComplete, setIsAnimationComplete] = useState(false)
+  const [heroData, setHeroData] = useState({
+    headingText: portfolioData.hero.headingText,
+    nameText: portfolioData.hero.nameText,
+    subheadingText: portfolioData.hero.subheadingText,
+    descriptionText: portfolioData.hero.descriptionText,
+  })
 
-  const { headingText, nameText, subheadingText, descriptionText } = portfolioData.hero
-
-  // Reset animation state on component mount
+  // Fetch dynamic hero data & reset animation state on component mount
   useEffect(() => {
+    fetch('/api/profile')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setHeroData({
+            headingText: json.data.headingText || portfolioData.hero.headingText,
+            nameText: json.data.nameText || portfolioData.hero.nameText,
+            subheadingText: json.data.subheadingText || portfolioData.hero.subheadingText,
+            descriptionText: json.data.descriptionText || portfolioData.hero.descriptionText,
+          })
+        }
+      })
+      .catch((err) => console.error('Failed to load hero profile', err))
+
     setIsAnimationComplete(false)
     const timer = setTimeout(() => {
       setIsAnimationComplete(true)
@@ -101,6 +119,8 @@ const HeroDemo = () => {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const { headingText, nameText, subheadingText, descriptionText } = heroData
 
   const handleViewProjects = () => {
     const projectsSection = document.getElementById('projects')

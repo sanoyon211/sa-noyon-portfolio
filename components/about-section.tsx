@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { IconDownload } from '@tabler/icons-react';
@@ -8,7 +9,37 @@ import Image from 'next/image';
 import { portfolioData } from '@/data/portfolio';
 
 export function AboutSection() {
+  const [aboutData, setAboutData] = useState({
+    title: portfolioData.about.title,
+    greeting: portfolioData.about.greeting,
+    descriptionParagraphs: portfolioData.about.descriptionParagraphs,
+    infoCards: portfolioData.about.infoCards,
+    resumeUrl: portfolioData.about.resumeUrl,
+    resumeFilename: portfolioData.about.resumeFilename,
+    imageSrc: portfolioData.about.imageSrc,
+  });
 
+  useEffect(() => {
+    fetch('/api/profile')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setAboutData((prev) => ({
+            ...prev,
+            title: json.data.aboutTitle || prev.title,
+            greeting: json.data.greeting || prev.greeting,
+            descriptionParagraphs: json.data.descriptionParagraphs?.length
+              ? json.data.descriptionParagraphs
+              : prev.descriptionParagraphs,
+            infoCards: json.data.infoCards?.length ? json.data.infoCards : prev.infoCards,
+            resumeUrl: json.data.resumeUrl || prev.resumeUrl,
+            resumeFilename: json.data.resumeFilename || prev.resumeFilename,
+            imageSrc: json.data.imageSrc || prev.imageSrc,
+          }));
+        }
+      })
+      .catch((err) => console.error('Failed to load profile data', err));
+  }, []);
 
   return (
     <section
@@ -29,7 +60,7 @@ export function AboutSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {portfolioData.about.title}
+          {aboutData.title}
         </motion.h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image */}
@@ -40,13 +71,14 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] aspect-square border-2 border-white/20 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm shadow-2xl">
+            <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] aspect-square border-2 border-white/20 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm shadow-2xl">
               <Image
-                src={portfolioData.about.imageSrc}
-                alt={portfolioData.about.title}
-                width={450}
-                height={450}
-                className="w-full h-full object-cover"
+                src={aboutData.imageSrc}
+                alt={aboutData.title}
+                fill
+                sizes="(max-width: 768px) 300px, 450px"
+                className="object-cover"
+                priority
               />
             </div>
           </motion.div>
@@ -60,20 +92,20 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="text-2xl font-semibold text-foreground">
-              {portfolioData.about.greeting}
+              {aboutData.greeting}
             </h3>
-            {portfolioData.about.descriptionParagraphs.map((paragraph, index) => (
+            {aboutData.descriptionParagraphs.map((paragraph, index) => (
               <p
                 key={index}
                 className={`text-muted-foreground leading-relaxed ${
-                  index === 0 ? "text-base sm:text-lg" : "text-lg"
+                  index === 0 ? 'text-base sm:text-lg' : 'text-lg'
                 }`}
               >
                 {paragraph}
               </p>
             ))}
             <div className="flex flex-wrap gap-4 mt-8">
-              {portfolioData.about.infoCards.map((card, index) => (
+              {aboutData.infoCards.map((card, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2">
                   <span className="text-foreground font-medium">
                     {card.label}: {card.value}
@@ -94,7 +126,12 @@ export function AboutSection() {
                 asChild
                 className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg"
               >
-                <a href={portfolioData.about.resumeUrl} download={portfolioData.about.resumeFilename}>
+                <a
+                  href={aboutData.resumeUrl}
+                  download={aboutData.resumeFilename || 'SA_Noyon_Resume.pdf'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IconDownload className="w-5 h-5 mr-2" />
                   Download Resume
                 </a>
@@ -106,3 +143,4 @@ export function AboutSection() {
     </section>
   );
 }
+
