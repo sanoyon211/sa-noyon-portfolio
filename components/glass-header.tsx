@@ -13,7 +13,7 @@ export function GlassHeader() {
       className="fixed top-0 left-0 right-0 z-50 p-4 backdrop-blur-md bg-white/70 dark:bg-white/10 border-b border-neutral-200 dark:border-white/20 transition-colors duration-300"
     >
       <nav className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="#" className="text-2xl font-bold text-black dark:text-foreground">
+        <Link href="/" className="text-2xl font-bold text-black dark:text-foreground">
           SA Noyon 
         </Link>
         <div className="flex space-x-4 items-center">

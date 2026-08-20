@@ -6,11 +6,9 @@ import {
   IconBrandReact,
   IconBrandAdobe,
   IconBrandNodejs,
-  IconBrandPython,
+  IconBrandJavascript,
   IconDatabase,
   IconBrandGit,
-  IconCloud,
-  IconDeviceMobile,
 } from "@tabler/icons-react"
 
 // Custom Skills Card Component
@@ -86,13 +84,13 @@ export function SkillsSection() {
     {
       title: 'Version Control',
       description: 'Git, GitHub, Project Collaboration',
-      icon: <IconCloud className="w-6 h-6" />,
+      icon: <IconBrandGit className="w-6 h-6" />,
     },
 
     {
       title: 'Programming Languages',
       description: 'JavaScript',
-      icon: <IconBrandPython className="w-6 h-6" />,
+      icon: <IconBrandJavascript className="w-6 h-6" />,
     },
     {
       title: 'Graphics Design',

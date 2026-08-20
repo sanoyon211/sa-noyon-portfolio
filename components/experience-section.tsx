@@ -3,16 +3,35 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Squares } from "@/components/ui/squares-background"
-import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Award } from "lucide-react"
+import { ChevronLeft, ChevronRight, Briefcase, GraduationCap } from "lucide-react"
 
 export function ExperienceSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
-
+    {
+      title: 'Experience',
+      icon: <Briefcase className="w-8 h-8 text-purple-500" />,
+      items: [
+        {
+          title: 'Industrial Trainee',
+          company: 'BD Calling IT Industry',
+          period: '2024 - Present',
+          description:
+            'Gaining hands-on industrial experience in web development, collaborating on real-world projects, and sharpening full-stack development skills with React, Next.js, and modern tools.',
+        },
+        {
+          title: 'Freelance Full-Stack Developer',
+          company: 'Self-Employed / Remote',
+          period: '2023 - Present',
+          description:
+            'Developing responsive web applications, MERN stack solutions, and custom client portals with clean code, modern UX, and robust backend integrations.',
+        },
+      ],
+    },
     {
       title: 'Education',
-      icon: <GraduationCap className="w-8 h-8" />,
+      icon: <GraduationCap className="w-8 h-8 text-blue-500" />,
       items: [
         {
           title: 'Diploma in Computer Science & Technology',
@@ -30,14 +49,13 @@ export function ExperienceSection() {
         },
         {
           title: 'Online Courses & Bootcamps',
-          company: 'Various Platforms',
-          period: '2026 - Present',
+          company: 'Programming Hero & Other Platforms',
+          period: '2023 - Present',
           description:
-            'Completed multiple online courses in React and modern web development from platforms like Programming Hero and YouTube.',
+            'Completed comprehensive training in modern full-stack web development, MERN stack, and Next.js.',
         },
       ],
     },
-    
   ];
 
   const nextSlide = () => {
@@ -75,37 +93,44 @@ export function ExperienceSection() {
 
         <div className="relative">
           {/* Navigation Arrows */}
-          <div className="flex justify-center items-center gap-4 mb-8">
-            <button
-              onClick={prevSlide}
-              className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="shrink-0">{slides[currentSlide].icon}</div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-center">{slides[currentSlide].title}</h3>
+          {slides.length > 1 && (
+            <div className="flex justify-center items-center gap-4 mb-8">
+              <button
+                onClick={prevSlide}
+                className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="shrink-0">{slides[currentSlide].icon}</div>
+                <h3 className="text-xl sm:text-2xl font-semibold text-center">{slides[currentSlide].title}</h3>
+              </div>
+              <button
+                onClick={nextSlide}
+                className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
             </div>
-            <button
-              onClick={nextSlide}
-              className="p-2 sm:p-3 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-colors backdrop-blur-sm shrink-0"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+          )}
 
           {/* Slide Indicators */}
-          <div className="flex justify-center gap-2 mb-8">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentSlide ? "bg-black dark:bg-white" : "bg-black/20 dark:bg-white/30"
-                }`}
-              />
-            ))}
-          </div>
+          {slides.length > 1 && (
+            <div className="flex justify-center gap-2 mb-8">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    index === currentSlide ? "bg-black dark:bg-white" : "bg-black/20 dark:bg-white/30"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Slide Content */}
           <AnimatePresence mode="wait">

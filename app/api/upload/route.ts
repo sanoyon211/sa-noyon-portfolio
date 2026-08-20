@@ -17,6 +17,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'No file provided' }, { status: 400 });
     }
 
+    // Max file size: 5MB
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { success: false, error: 'File size exceeds 5MB limit. Please upload a smaller file or compress it.' },
+        { status: 400 }
+      );
+    }
+
     // Verify allowed file types (Images and PDF documents)
     const allowedMimeTypes = [
       'image/jpeg',
