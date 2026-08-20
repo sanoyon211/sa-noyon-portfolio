@@ -101,6 +101,7 @@ export function ProjectsSection() {
                   alt={project.title}
                   width={500}
                   height={300}
+                  unoptimized={Boolean(project.image?.startsWith('data:') || project.image?.startsWith('http'))}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 bg-neutral-100 dark:bg-neutral-900"
                 />
                 

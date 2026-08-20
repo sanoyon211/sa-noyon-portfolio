@@ -78,6 +78,7 @@ export function AboutSection() {
                 fill
                 sizes="(max-width: 768px) 300px, 450px"
                 className="object-cover"
+                unoptimized={Boolean(aboutData.imageSrc?.startsWith('data:') || aboutData.imageSrc?.startsWith('http'))}
                 priority
               />
             </div>

@@ -45,6 +45,7 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
               alt={project.title}
               fill
               priority
+              unoptimized={Boolean(project.image?.startsWith('data:') || project.image?.startsWith('http'))}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

@@ -238,10 +238,56 @@ export default function AdminPage() {
           toast.success("Project image uploaded successfully!")
         }
       } else {
-        toast.error(json.error || "Upload failed")
+        // Fallback for Vercel/serverless environments (read-only filesystem): convert to base64
+        if (file.size <= 4 * 1024 * 1024) {
+          const reader = new FileReader()
+          reader.onload = () => {
+            const base64Url = reader.result as string
+            if (type === 'avatar') {
+              setProfileData(prev => ({ ...prev, imageSrc: base64Url }))
+              toast.success("Picture loaded! Click 'Save All Settings' below to apply.")
+            } else if (type === 'resume') {
+              setProfileData(prev => ({ 
+                ...prev, 
+                resumeUrl: base64Url, 
+                resumeFilename: file.name || 'SA_Noyon_Resume.pdf' 
+              }))
+              toast.success("Resume PDF loaded! Click 'Save All Settings' below to apply.")
+            } else if (type === 'project') {
+              setProjectFormData(prev => ({ ...prev, image: base64Url }))
+              toast.success("Project image loaded! Click 'Save Project' to apply.")
+            }
+          }
+          reader.readAsDataURL(file)
+        } else {
+          toast.error("File exceeds 4MB. Please use a smaller file or paste an external URL.")
+        }
       }
     } catch (error) {
-      toast.error("File upload failed")
+      // Network or server exception fallback: convert to base64
+      if (file.size <= 4 * 1024 * 1024) {
+        const reader = new FileReader()
+        reader.onload = () => {
+          const base64Url = reader.result as string
+          if (type === 'avatar') {
+            setProfileData(prev => ({ ...prev, imageSrc: base64Url }))
+            toast.success("Picture loaded! Click 'Save All Settings' below to apply.")
+          } else if (type === 'resume') {
+            setProfileData(prev => ({ 
+              ...prev, 
+              resumeUrl: base64Url, 
+              resumeFilename: file.name || 'SA_Noyon_Resume.pdf' 
+            }))
+            toast.success("Resume PDF loaded! Click 'Save All Settings' below to apply.")
+          } else if (type === 'project') {
+            setProjectFormData(prev => ({ ...prev, image: base64Url }))
+            toast.success("Project image loaded! Click 'Save Project' to apply.")
+          }
+        }
+        reader.readAsDataURL(file)
+      } else {
+        toast.error("File upload failed")
+      }
     }
   }
 
